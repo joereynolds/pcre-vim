@@ -6,10 +6,26 @@ Vim/Neovim use their own flavour of regular expressions. This is a lua script to
 
 ## Comparison
 
-| Character | Vim                  |  PCRE              |
-|-----------|----------------------|--------------------|
-| .         | A single character   | A single character |
+(Comparison table assuming `magic` option in Vim)
 
+| Character | Vim                                |  PCRE                            |
+|-----------|------------------------------------|----------------------------------|
+| .         | A single character                 | A single character               |
+| *         | 0 or more of the preceeding item   | 0 or more of the preceeding item |
+
+## Design
+
+1. Code is in lua
+2. Each pattern item should have a `magic` and `nomagic` attribute so we can convert for `magic` and `nomagic` variants. Most of the time they won't differ but let's be thorough.
+
+i.e. (pseudocode)
+
+```
+let star = {
+    magic: "*",
+    nomagic: "\*"
+}
+```
 
 
 ## References
