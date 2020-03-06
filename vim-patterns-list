@@ -1,0 +1,121 @@
+     'magic' 'nomagic'	matches of the preceding atom ~
+|/star|	*	\*	0 or more	as many as possible
+|/\+|	\+	\+	1 or more	as many as possible
+|/\=|	\=	\=	0 or 1		as many as possible
+|/\?|	\?	\?	0 or 1		as many as possible
+
+|/\{|	\{n,m}	\{n,m}	n to m		as many as possible
+	\{n}	\{n}	n		exactly
+	\{n,}	\{n,}	at least n	as many as possible
+	\{,m}	\{,m}	0 to m		as many as possible
+	\{}	\{}	0 or more	as many as possible (same as *)
+
+|/\{-|	\{-n,m}	\{-n,m}	n to m		as few as possible
+	\{-n}	\{-n}	n		exactly
+	\{-n,}	\{-n,}	at least n	as few as possible
+	\{-,m}	\{-,m}	0 to m		as few as possible
+	\{-}	\{-}	0 or more	as few as possible
+
+							*E59*
+|/\@>|	\@>	\@>	1, like matching a whole pattern
+|/\@=|	\@=	\@=	nothing, requires a match |/zero-width|
+|/\@!|	\@!	\@!	nothing, requires NO match |/zero-width|
+|/\@<=|	\@<=	\@<=	nothing, requires a match behind |/zero-width|
+|/\@<!|	\@<!	\@<!	nothing, requires NO match behind |/zero-width|
+
+
+      ordinary atom ~
+      magic   nomagic	matches ~
+|/^|	^	^	start-of-line (at start of pattern) |/zero-width|
+|/\^|	\^	\^	literal '^'
+|/\_^|	\_^	\_^	start-of-line (used anywhere) |/zero-width|
+|/$|	$	$	end-of-line (at end of pattern) |/zero-width|
+|/\$|	\$	\$	literal '$'
+|/\_$|	\_$	\_$	end-of-line (used anywhere) |/zero-width|
+|/.|	.	\.	any single character (not an end-of-line)
+|/\_.|	\_.	\_.	any single character or end-of-line
+|/\<|	\<	\<	beginning of a word |/zero-width|
+|/\>|	\>	\>	end of a word |/zero-width|
+|/\zs|	\zs	\zs	anything, sets start of match
+|/\ze|	\ze	\ze	anything, sets end of match
+|/\%^|	\%^	\%^	beginning of file |/zero-width|		*E71*
+|/\%$|	\%$	\%$	end of file |/zero-width|
+|/\%V|	\%V	\%V	inside Visual area |/zero-width|
+|/\%#|	\%#	\%#	cursor position |/zero-width|
+|/\%'m|	\%'m	\%'m	mark m position |/zero-width|
+|/\%l|	\%23l	\%23l	in line 23 |/zero-width|
+|/\%c|	\%23c	\%23c	in column 23 |/zero-width|
+|/\%v|	\%23v	\%23v	in virtual column 23 |/zero-width|
+
+Character classes:					*/character-classes*
+      magic   nomagic	matches ~
+|/\i|	\i	\i	identifier character (see 'isident' option)
+|/\I|	\I	\I	like "\i", but excluding digits
+|/\k|	\k	\k	keyword character (see 'iskeyword' option)
+|/\K|	\K	\K	like "\k", but excluding digits
+|/\f|	\f	\f	file name character (see 'isfname' option)
+|/\F|	\F	\F	like "\f", but excluding digits
+|/\p|	\p	\p	printable character (see 'isprint' option)
+|/\P|	\P	\P	like "\p", but excluding digits
+|/\s|	\s	\s	whitespace character: <Space> and <Tab>
+|/\S|	\S	\S	non-whitespace character; opposite of \s
+|/\d|	\d	\d	digit:				[0-9]
+|/\D|	\D	\D	non-digit:			[^0-9]
+|/\x|	\x	\x	hex digit:			[0-9A-Fa-f]
+|/\X|	\X	\X	non-hex digit:			[^0-9A-Fa-f]
+|/\o|	\o	\o	octal digit:			[0-7]
+|/\O|	\O	\O	non-octal digit:		[^0-7]
+|/\w|	\w	\w	word character:			[0-9A-Za-z_]
+|/\W|	\W	\W	non-word character:		[^0-9A-Za-z_]
+|/\h|	\h	\h	head of word character:		[A-Za-z_]
+|/\H|	\H	\H	non-head of word character:	[^A-Za-z_]
+|/\a|	\a	\a	alphabetic character:		[A-Za-z]
+|/\A|	\A	\A	non-alphabetic character:	[^A-Za-z]
+|/\l|	\l	\l	lowercase character:		[a-z]
+|/\L|	\L	\L	non-lowercase character:	[^a-z]
+|/\u|	\u	\u	uppercase character:		[A-Z]
+|/\U|	\U	\U	non-uppercase character		[^A-Z]
+|/\_|	\_x	\_x	where x is any of the characters above: character
+			class with end-of-line included
+(end of character classes)
+
+      magic   nomagic	matches ~
+|/\e|	\e	\e	<Esc>
+|/\t|	\t	\t	<Tab>
+|/\r|	\r	\r	<CR>
+|/\b|	\b	\b	<BS>
+|/\n|	\n	\n	end-of-line
+|/~|	~	\~	last given substitute string
+|/\1|	\1	\1	same string as matched by first \(\)
+|/\2|	\2	\2	Like "\1", but uses second \(\)
+	   ...
+|/\9|	\9	\9	Like "\1", but uses ninth \(\)
+								*E68*
+|/\z1|	\z1	\z1	only for syntax highlighting, see |:syn-ext-match|
+	   ...
+|/\z1|	\z9	\z9	only for syntax highlighting, see |:syn-ext-match|
+
+	x	x	a character with no special meaning matches itself
+
+|/[]|	[]	\[]	any character specified inside the []
+|/\%[]|	\%[]	\%[]	a sequence of optionally matched atoms
+
+|/\c|	\c	\c	ignore case, do not use the 'ignorecase' option
+|/\C|	\C	\C	match case, do not use the 'ignorecase' option
+|/\Z|	\Z	\Z	ignore differences in Unicode "combining characters".
+			Useful when searching voweled Hebrew or Arabic text.
+
+      magic   nomagic	matches ~
+|/\m|	\m	\m	'magic' on for the following chars in the pattern
+|/\M|	\M	\M	'magic' off for the following chars in the pattern
+|/\v|	\v	\v	the following chars in the pattern are "very magic"
+|/\V|	\V	\V	the following chars in the pattern are "very nomagic"
+|/\%#=|   \%#=1   \%#=1   select regexp engine |/zero-width|
+
+|/\%d|	\%d	\%d	match specified decimal character (eg \%d123)
+|/\%x|	\%x	\%x	match specified hex character (eg \%x2a)
+|/\%o|	\%o	\%o	match specified octal character (eg \%o040)
+|/\%u|	\%u	\%u	match specified multibyte character (eg \%u20ac)
+|/\%U|	\%U	\%U	match specified large multibyte character (eg
+			\%U12345678)
+|/\%C|	\%C	\%C	match any composing characters

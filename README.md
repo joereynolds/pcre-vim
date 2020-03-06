@@ -30,6 +30,11 @@ let star = {
 
 ## References
 
+
+`:help perl-patterns`
+
+https://github.com/othree/eregex.vim
+
 https://github.com/neovim/neovim/issues/3208#issuecomment-250898112
 
 This comment in particular
