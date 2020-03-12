@@ -8,10 +8,13 @@ Vim/Neovim use their own flavour of regular expressions. This is a lua script to
 
 (Comparison table assuming `magic` option in Vim)
 
-| Character | Vim                                |  PCRE                            |
-|-----------|------------------------------------|----------------------------------|
-| .         | A single character                 | A single character               |
-| *         | 0 or more of the preceeding item   | 0 or more of the preceeding item |
+| vim character | PCRE Character | Vim                                | PCRE                             |
+|---------------|----------------|------------------------------------|----------------------------------|
+| .             | .              | A single character                 | A single character               |
+| *             | *              | 0 or more of the preceding item    | 0 or more of the preceding item  |
+| \+            | +              | 1 or more of the preceding item    | 1 or more of the preceding item  |
+| \?            | ?              | 0 or 1 of the preceding item       | 0 or 1 of the preceding item     |
+| \=            | .............. | 0 or 1 of the preceding item       | ................................ |
 
 ## Design
 
@@ -32,6 +35,8 @@ let star = {
 
 
 `:help perl-patterns`
+
+`:help pattern.txt`
 
 https://github.com/othree/eregex.vim
 
