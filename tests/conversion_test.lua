@@ -19,4 +19,10 @@ function test_characters_are_mapped_correctly_with_a_nomagic_option_specified()
     luaunit.assertEquals(actual, expected)
 end
 
+function test_expressions_are_mapped_correctly()
+    local actual = conversion.pcre_to_vim("..+")
+    local expected = "..\\+"
+    luaunit.assertEquals(actual, expected)
+end
+
 os.exit(luaunit.LuaUnit.run())

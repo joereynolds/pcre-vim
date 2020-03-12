@@ -1,5 +1,11 @@
 local conversion = {}
 
+local dot = {
+    pcre = ".",
+    magic = ".",
+    nomagic = "\\.",
+}
+
 local star = {
     pcre = "*",
     magic = "*",
@@ -13,18 +19,22 @@ local plus = {
 }
 
 local character_map = {
+    ["."] = dot,
     ["*"] = star,
     ["+"] = plus
 }
 
-function conversion.convert_pcre_to_vim(string)
-    -- vim_expression = ""
-    -- foreach character in word
-    --     local vim_character = convert_character_to_vim_character(character, 'magic')
-    --     vim_expression += vim_character
-    -- end
-    --
-    -- return vim_expression
+function conversion.pcre_to_vim(string)
+    local vim_expression = ""
+
+    for i = 1, #string do
+        local character = string:sub(i, i)
+        local vim_character = conversion.pcre_character_to_vim_character(character, 'magic')
+        vim_expression = vim_expression .. vim_character
+        i = i + 1
+    end
+    
+    return vim_expression
 end
 
 function conversion.pcre_character_to_vim_character(character, magic_option)

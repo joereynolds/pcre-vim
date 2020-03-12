@@ -4,4 +4,4 @@ local conversion = require "./src/conversion"
 
 local pcre_regex = arg[1]
 
-print(pcre_regex)
+print(conversion.pcre_to_vim(pcre_regex))
