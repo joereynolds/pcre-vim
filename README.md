@@ -1,5 +1,7 @@
 # pcre-vim
 
+NOTE: This is a proof of concept and major WIP. Don't expect anything
+
 Convert PCREs to vim expressions.
 
 Vim/Neovim use their own flavour of regular expressions. This is a lua script to convert sane PCREs to Vim's version.
